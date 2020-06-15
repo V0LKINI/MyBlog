@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,8 +52,8 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav ml-auto">
-	      <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill">VK</a>
+	      <a class="nav-item nav-link" href="{%  static 'About_me.txt' %}">About me</a>
+	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill" target="blank" rel="noopener noreferrer">VK</a>
 	      <a class="nav-item nav-link active" href="{% url 'showblog' %}">Blog</a>
 	    </div>
 	  </div>
@@ -65,7 +66,7 @@
 		</div>
 	      {% for post in posts.all %}
 	        <div class="card-body col-md-4">
-	          <a href=""><h4 >{{post.post_title}}</h4></a>
+	          <a href="{% url 'specific_post' post.id %}"><h4 >{{post.post_title}}</h4></a>
 	          <img class="img-fluid" src="{{ post.post_image.url }}"/>
 	          <p>{{post.get_summary}}</p>
 	          <p>{{post.post_date}}</p>

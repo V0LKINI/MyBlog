@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,8 +51,8 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav ml-auto">
-	      <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
-	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill">VK</a>
+	      <a class="nav-item nav-link" href="{%  static 'About_me.txt' %}">About me</a>
+	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill" target="blank" rel="noopener noreferrer">VK</a>
 	      <a class="nav-item nav-link" href="{% url 'showblog' %}">Blog</a>
 	    </div>
 	  </div>
@@ -65,6 +66,8 @@
 	      <p>
 	        <a href="mailto:k.volkov.n@gmail.com" class="btn btn-primary my-2">Mail me</a>
 	      </p>
+
+	      <img src="{% static 'me.png' %}" height=300 width=300 class="img-fluid">
 	    </div>
 	  </section>
 
