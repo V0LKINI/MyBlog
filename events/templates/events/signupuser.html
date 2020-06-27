@@ -1,0 +1,20 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+<section class="jumbotron text-center">
+	<h2>Sign up</h2>
+	<form method="post">
+	{% csrf_token %}
+	{% for field in form %}
+	<p>
+	  {{ field.label_tag }}<br>
+	  {{ field }}  
+	</p>
+	{% endfor %}
+	 <p>{{ error }}</p>
+	<button type="submit">Sign up</button>
+	</form>
+</section>	
+{% endblock %}
+
+

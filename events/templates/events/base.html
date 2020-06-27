@@ -49,15 +49,33 @@
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
+
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-	    <div class="navbar-nav ml-auto">
+	      <div class="navbar-nav ml-auto">
+    	  {% if user.is_authenticated %}
+
+		  <form action="{% url 'logoutuser' %}" method="POST">
+		    {% csrf_token %}
+		    <button class="nav-item nav-pill" type="submit">Logout</button>
+		  </form>
+
+		  {% else %}
+		  <a class="nav-item nav-link" href="{% url 'signupuser' %}">Sign up</a>
+		  <a class="nav-item nav-link" href="{% url 'loginuser' %}">Log in</a> 
+
+	      {% endif %}
 	      <a class="nav-item nav-link" href="{%  static 'About_me.txt' %}">About me</a>
 	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill" target="blank" rel="noopener noreferrer">VK</a>
-	      <a class="nav-item nav-link" href="{% url 'showblog' %}">Blog</a>
+	      {% if '/posts/' in request.path %}
+	      <a class="nav-item nav-link active" href="{% url 'showblog' %}"  >Blog</a>
+	      {% else %}
+	      <a class="nav-item nav-link" href="{% url 'showblog' %}"  >Blog</a>
+	      {% endif %}
 	    </div>
 	  </div>
 	</nav>
 
+   
 	<main role="main">
 
 		{% block content %}

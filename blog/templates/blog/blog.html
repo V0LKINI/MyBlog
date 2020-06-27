@@ -1,17 +1,19 @@
 {% extends "events/base.html" %}
 {% block content %}
 <main>
+	<section class="jumbotron text-center">
 	<div class="pl-3 pt-3">
 
   	<h1>Recent posts</h1>
 	</div>
       {% for post in posts.all %}
-        <div class="card-body col-md-4">
+        <div class="card-body">
           <a href="{% url 'specific_post' post.id %}"><h4 >{{post.post_title}}</h4></a>
-          <img class="img-fluid" src="{{ post.post_image.url }}"/>
+          <img class="img-fluid" width="400" height="400" src="{{ post.post_image.url }}"/>
           <p>{{post.get_summary}}</p>
           <p>{{post.post_date}}</p>
         </div>
       {% endfor%}
+      </section>
 </main>
 {% endblock %}
