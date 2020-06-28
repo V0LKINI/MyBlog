@@ -13,7 +13,11 @@ def signupuser(request):
 	if request.method == 'GET':
 		return render(request, 'events/signupuser.html', {'form':UserCreationForm()})
 	else:
-		if request.POST['password1'] == request.POST['password2']:
+		if request.POST['password1'] != request.POST['password2']:
+			return render(request, 'events/signupuser.html', {'form':UserCreationForm(), 'error': 'Passwords did not match'})
+		elif len(request.POST['password1']) < 10:
+				return render(request, 'events/signupuser.html', {'form':UserCreationForm(), 'error': "Password must be longer then 10 symbols"})
+		else:	
 			try:
 				user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
 				user.save()
@@ -21,8 +25,7 @@ def signupuser(request):
 				return redirect('home')
 			except IntegrityError:
 				return render(request, 'events/signupuser.html', {'form':UserCreationForm(), 'error': 'That username has already been taken. Please choose another one.'})
-		else:
-			return render(request, 'events/signupuser.html', {'form':UserCreationForm(), 'error': 'Passwords did not match'})
+			
 
 def loginuser(request):
 	if request.method == 'GET':

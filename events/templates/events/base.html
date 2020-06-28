@@ -51,27 +51,40 @@
 	  </button>
 
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-	      <div class="navbar-nav ml-auto">
-    	  {% if user.is_authenticated %}
-
-		  <form action="{% url 'logoutuser' %}" method="POST">
-		    {% csrf_token %}
-		    <button class="nav-item nav-pill" type="submit">Logout</button>
-		  </form>
-
-		  {% else %}
-		  <a class="nav-item nav-link" href="{% url 'signupuser' %}">Sign up</a>
-		  <a class="nav-item nav-link" href="{% url 'loginuser' %}">Log in</a> 
-
-	      {% endif %}
+	      <div class="navbar-nav ">
 	      <a class="nav-item nav-link" href="{%  static 'About_me.txt' %}">About me</a>
 	      <a class="nav-item nav-link" href="https://vk.com/vo1kov_kirill" target="blank" rel="noopener noreferrer">VK</a>
+
 	      {% if '/posts/' in request.path %}
 	      <a class="nav-item nav-link active" href="{% url 'showblog' %}"  >Blog</a>
 	      {% else %}
 	      <a class="nav-item nav-link" href="{% url 'showblog' %}"  >Blog</a>
 	      {% endif %}
-	    </div>
+	      </div>
+
+	      <div class="navbar-nav ml-auto">
+	      	 {% if user.is_authenticated %}
+			    <form action="{% url 'logoutuser' %}" method="POST" class="form-inline my-2 my-lg-0">
+			      {% csrf_token %}
+			      <button class="btn btn-primary my-2 my-sm-0" style="background-color: #4A76A8; border: 2px solid #4A76A8;" type="submit">Logout</button>
+			    </form>
+			 {% else %}
+			  	{% if '/signup/' in request.path %}
+			    <a class="nav-item nav-link active" href="{% url 'signupuser' %}">Sign up</a>
+			    {% else %}
+			    <a class="nav-item nav-link" href="{% url 'signupuser' %}">Sign up</a>
+			    {% endif %}
+
+			    {% if '/login/' in request.path %}
+			     <a class="nav-item nav-link active" href="{% url 'loginuser' %}">Log in</a> 
+			    {% else %}
+			     <a class="nav-item nav-link" href="{% url 'loginuser' %}">Log in</a>
+			 	{% endif %}
+			 {% endif %}
+		   </div>
+      	 
+
+	    
 	  </div>
 	</nav>
 
